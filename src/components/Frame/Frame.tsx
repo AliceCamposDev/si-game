@@ -1,6 +1,6 @@
 function Frame (){
     return(
-        <div>frame componnent</div>
+        <div>Frame componnent</div>
     )
 }
 export default Frame
