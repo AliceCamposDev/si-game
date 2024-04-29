@@ -1,8 +1,17 @@
+import api from "../../services/api"
 import "./Game.css"
+
 function Game (){
+
+     function loadQuestion(day: number){
+        const question = api.get('questions/'+day)
+        
+        return(question[0])
+    }
     return (
         <div className="container">
             <div className="question">
+            <p>{loadQuestion(1)}</p>
             <p>É o seu primeiro dia. Você encontra um cara de TI na máquina de café. Durante o bate-papo, ele lhe entrega um monte de papéis para ler sobre as regras de segurança. Você assina a carta de segurança da empresa e recebe um cartão com suas credenciais de login.</p>
             <p>O que você acha?</p>
             </div>
