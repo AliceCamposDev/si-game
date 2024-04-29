@@ -1,0 +1,26 @@
+.bar{
+    width: 50%;
+    height: 20px;
+    border-radius: 10px;
+    background-color: gray;
+}
+
+.progress{
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgb(184, 0, 0);
+    
+}
+.logo{
+background-image: url(../../assets/images/Robbyson-red-logo.png);
+background-size: cover;
+width: 30px;
+height: 30px;
+margin: 8px;
+}
+.scoreContainer{
+    display: flex; 
+    align-items: center;
+    padding: 5px;
+    justify-content: flex-start;
+}

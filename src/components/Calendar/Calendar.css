@@ -1,0 +1,44 @@
+.calendarContainer{
+    background-color: lightgrey;
+    border-radius: 8px;
+    
+    max-height: 90vh;
+    width: 30%;
+    
+    margin-right: 20px;
+}
+.holiday{
+    color: rgb(170, 0, 0);
+}
+.calendar{
+    max-height: inherit;
+
+    display: list-item;
+    align-items: start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.day{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 3px;
+    border-radius: 8px;
+    width: 100%;
+}
+#scrollstyle::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    background-color: #F5F5F5;
+  }
+  
+  #scrollstyle::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 15px;
+  }
+  
+  #scrollstyle::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #cccccc;
+  }
