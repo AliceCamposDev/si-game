@@ -1,33 +1,59 @@
+import { json, text } from "stream/consumers";
 import api from "../../services/api"
 import "./Game.css"
+import React, {useState, useEffect}  from 'react';
 
-function Game (){
+function Game (props: any){
 
-     function loadQuestion(day: number){
-        const question = api.get('questions/'+day)
-        
-        return(question[0])
+   
+    const [question, setQuestion] = useState([{_id: "", day: 0, text: "", question: "", readmore: "", _v: 0, correctAnswer: 0}])
+    const [answers, setAnswers] = useState([{_id: "", day: 0, answer_text: "", score: 0, _v: 0}])
+
+    function test(){
+        console.log(props.choiceScore)
     }
+
+//TODO: testas se day existe antes de puxar do banco
+
+    useEffect(() => {
+        api.get('questions/'+props.day)
+        .then((res: { data: Object; }) => {
+           setQuestion(JSON.parse(JSON.stringify(res.data))) //TODO: consertar isso... crimes sendo cometidos aqui!
+        })
+     }, [props.day])
+
+     useEffect(() => {
+        api.get('answers/'+props.day)
+        .then((res: { data: Object; }) => {
+            setAnswers(JSON.parse(JSON.stringify(res.data)))//TODO: consertar isso... crimes sendo cometidos aqui!
+        })
+     }, [props.day])
+
+     function choice(choice: number){
+        props.playerChoiceScore(answers[choice]? answers[choice].score: 98)
+        console.log(props.day  )
+        props.passDay(props.day+1) 
+        console.log(props.day  )
+     }
+
     return (
         <div className="container">
             <div className="question">
-            <p>{loadQuestion(1)}</p>
-            <p>É o seu primeiro dia. Você encontra um cara de TI na máquina de café. Durante o bate-papo, ele lhe entrega um monte de papéis para ler sobre as regras de segurança. Você assina a carta de segurança da empresa e recebe um cartão com suas credenciais de login.</p>
-            <p>O que você acha?</p>
+            <p>{question[0]? question[0].text: ""}</p>
+            <p>{question[0]? question[0].question: ""}</p>
             </div>
             <div className="responses">
-            <button className="response">
-            Isso é bom. É a primeira vez que você tem um documento assim. A segurança de TI é levada a sério aqui. Você começa a ler todas as informações que recebeu.
+            <button   onClick={()=> choice(0)} className="response">
+            {answers[0]? answers[0].answer_text: ""}
             </button>
-            <button className="response">
-            Você não tem tanta certeza. Gostaria de ter algo mais formal, com explicações mais claras e briefings sobre todas as políticas e procedimentos.
-
+            <button  onClick={() => test()} className="response">
+            {answers[1]? answers[1].answer_text: ""}
             </button>
-            <button className="response">
-            Você conhece essas coisas. Vai ler os documentos mais tarde, logo após ler os 'termos e condições' do WiFi Gratuido da Cafeteria.
+            <button onClick={()=> choice(2)} className="response">
+            {answers[2]? answers[2].answer_text: ""}
             </button>
-            <button className="response">
-            Você acha que a administração deveria ser responsável por informar todos os funcionários.
+            <button onClick={()=> choice(3)} className="response">
+            {answers[3]? answers[3].answer_text: ""}
             </button>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import "./Score.css"
-function Score (){
+function Score (props: any){
 
     let progress = document.getElementsByClassName('progress') as HTMLCollectionOf<HTMLElement> 
 
@@ -8,9 +8,20 @@ function Score (){
     const [score, setScore] = useState(maxPlayerProgress)
     const [relativeScore, setRelativeScore] = useState(maxPlayerProgress)
   
+   useEffect(()=>{
+    setScore(score + props.choiceScore)
+    if ((relativeScore +props.choiceScore) <= 0){
+        setRelativeScore(0)
+    }else if((relativeScore + props.choiceScore) >= maxPlayerProgress){
+        setRelativeScore(maxPlayerProgress)
+    }else{
+        setRelativeScore(relativeScore+props.choiceScore)
+    }
+   },[props.day])
+
+
     function scorepercent(){
         let percent = relativeScore*100/maxPlayerProgress
-        console.log("percent ", percent, "   relativeScore ",relativeScore)
         if (relativeScore<=0 || percent <= 0){
             return ("0%")
         }
@@ -20,16 +31,6 @@ function Score (){
         return (percent + "%")
     }
 
-    function changeScore(answerScore: number){
-        setScore(score + answerScore)
-        if ((relativeScore + answerScore) <= 0){
-            setRelativeScore(0)
-        }else if((relativeScore + answerScore) >= maxPlayerProgress){
-            setRelativeScore(maxPlayerProgress)
-        }else{
-            setRelativeScore(relativeScore+answerScore)
-        }
-    }
 
 
     useEffect(() => {
@@ -47,8 +48,7 @@ function Score (){
 
                 </div>
             </div>
-            <button onClick={()=> changeScore(-3)}>abacate</button>
-            <button onClick={()=> changeScore(+3)}>amora</button>
+
         </div>
     )
 }
