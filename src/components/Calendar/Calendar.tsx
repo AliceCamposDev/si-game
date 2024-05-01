@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react"
 import "./Calendar.css"
 
-function Calendar (){
+function Calendar (props: any){
     let day = document.getElementsByClassName('day') as HTMLCollectionOf<HTMLElement> 
-    const [currentDay, setCurrentDay] = useState (0)
-
+    
     useEffect(() => {
 
-        if (day.length > 0  && currentDay < day.length){
-            if (currentDay > 0){
-                day[currentDay - 1].style.backgroundColor = "lightgray"
+        if (day.length > 0  && props.day - 1 < day.length){
+            if (props.day  > 1){
+                day[props.day  - 2].style.backgroundColor = "lightgray"
+                day[props.day-1].scrollIntoView({ block: 'center',  behavior: 'smooth' })
             }
-            day[currentDay].style.backgroundColor = "lightblue"
+            day[props.day -1].style.backgroundColor = "gray"
          }
-    },[currentDay]) 
+         
+         
+    },[props.day ]) 
     
-    function passDay(){
-        setCurrentDay(currentDay+1)
-    }
+
     return(
         <div className="calendarContainer">
             <div id="scrollstyle" className="calendar">
@@ -31,7 +31,7 @@ function Calendar (){
                 <div className = "day">08</div>
                 <div className = "day">09</div>
                 <div className = "day">10</div>
-                <div className = "day">11</div>
+                <div id="d11" className = "day">11</div>
                 <div className = "day">12</div>
                 <div className = "day holiday">13</div>
                 <div className = "day holiday">14</div>
@@ -52,7 +52,6 @@ function Calendar (){
                 <div className = "day">29</div>
                 <div className = "day">30</div>
             </div>
-            <button onClick={() => passDay()}>abacaxi</button>
         </div>
     )
 }

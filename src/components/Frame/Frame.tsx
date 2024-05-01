@@ -20,7 +20,7 @@ function Frame() {
           <Score choiceScore={choiceScore} day={day} />
           <Game choiceScore={choiceScore} playerChoiceScore={(v: any) => setChoiceScore(v)} day={day} passDay={(v: any) => setDay(v)}/>
         </div>
-        <Calendar />
+        <Calendar day={day}/>
       </div>
     </div>
   );
