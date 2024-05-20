@@ -1,11 +1,13 @@
 .calendarContainer{
+    margin-bottom:8vh;
+    margin-top:8vh;
     background-color: lightgrey;
     border-radius: 8px;
-    
-    max-height: 90vh;
+    max-height: 84vh;
     width: 11vw;
-    
     margin-right: 4vw;
+    overflow: hidden;
+    border: 1px #00a9e0 solid;
 }
 .holiday{
     color: rgb(170, 0, 0);

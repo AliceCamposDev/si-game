@@ -7,7 +7,6 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import Menu from "./components/Menu/Menu"
 import Frame from "./components/Frame/Frame"
 import History from './components/History/History';
-import Credits from './components/Credits/Credits';
 
 const router = createBrowserRouter([
   {
@@ -21,20 +20,16 @@ const router = createBrowserRouter([
   {
     path: "/history",
     element: <History />
-  },
-  {
-    path: "/credits",
-    element: <Credits />
   }
 ])
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <div>
     <RouterProvider router={(router)}/>
     <App />
-  </React.StrictMode>
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

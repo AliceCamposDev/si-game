@@ -1,6 +1,16 @@
 *{
   border: none;
-  
+  margin: 0px;
+  font-family: itcAvantGardePro;
   font-weight: 400;
   font-style: normal;
+}
+body{
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: itcAvantGardePro;
+  src: url(../src/assets/fonts/ITCAvantGardePro-Bk.otf);
 }

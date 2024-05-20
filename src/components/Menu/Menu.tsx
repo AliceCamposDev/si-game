@@ -8,8 +8,7 @@ return(
         </div>
         <div className="buttons">
             <Link to="/game"><button>Jogar</button></Link>
-            <Link to="/history"><button>Estatisticas</button></Link>
-            <Link to="/credits"><button>Creditos</button> </Link>
+            <Link to="/history"><button>Histórico</button></Link>
         </div>
     </div>
 )

@@ -1,42 +1,73 @@
-.container{
-    height: 100vh;
+.gameContainer{
+    height: 90vh;
     width: 85vw;
-}
-.question{
-    background-color: rgb(15, 14, 2);
-    color: rgb(255, 255, 255);
-    padding: 10px 30px;
-    width: 60%;
-    border-radius: 8px;
-    font-size: 1.5em;
-}
-.responses{
-    height: 50%;
-    width: 70%;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.responses button{
-    height: 15%;
-    border-radius: 8px;
+
+.responses{
+    height: 60%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
+
+.optionContainer{
+    width: 100%;
+    display: flex;
+    background-color: aliceblue;
+    height: 20%;
+    border-radius: 8px;
+    text-align: center; 
+    overflow: hidden;
+}
+
+.optionContainer button{
+
+   display: none;
+    width: 0%;
+    background-color: #00a9e0; 
+    border-radius: 7px;
+    height: 100%;
+    width: 13%;
+    animation: slidein .3s;
+    align-items: left;
+    cursor: pointer;
+}
+@keyframes slidein {
+    from {
+      transform: translateX(100%);
+    }
+  
+    to {
+      transform: translateX(0%);
+    }
+  }
 .popover{
-    background-color: rgb(81, 196, 58);
+    color:white;
+    padding-top: 10px;
+    text-align: center;
+    background-color: rgb(207, 57, 37);
     position: absolute;
-    transform: translateY(20vh);
     font-size: 25px;
-    width: 50%;
+    width: 60vw;
+    height: 60vh;
     visibility: visible;
     display: flex;
     flex-direction: column;
     visibility: hidden;
-
-    border-radius: 8px;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 30px;
 }
 
 .popover p{
-    padding: 5px 30px;
+    text-align: justify;
+    padding: 20px;
+    font-size: 80%;
 }
 
 .popoverBtns{
@@ -50,9 +81,93 @@
     height: 0px;
 
     width: 100%;
-    background-color: hotpink;
+    background-color: #92D2F4;
     font-size: 20px;
 
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
+
+.response{
+    font-size: 14px;
+    animation: .3s;
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    padding:5px;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+
+.shell-box {
+  font-family: Arial;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-height: 250px;
+  min-height: 250px;
+  background-color: red;
+
+  border: 1px blue solid;    
+  overflow: hidden;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.shell-box {
+  font-family: Arial;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-height: 250px;
+  min-height: 250px;
+  background-color: red;
+
+  border: 1px blue solid;    
+  overflow: hidden;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.shell-box a{
+  color: white;
+}
+
+.shell-heading {
+  padding: .4rem .5rem;
+  color: #fff;
+  background-color: blue;
+}
+
+.icon {
+  box-sizing: border-box;
+  color: whitesmoke;
+  border: 1px solid #222;
+  background: #222;
+  padding: 3px;
+  font-size: 13px;
+  border-radius: 2px;
+}
+
+.shell-script {
+    overflow-y: auto;
+    overflow-x: hidden;
+    letter-spacing: 1.5px;
+    height: 100%;
+    padding: .5rem 1rem;
+    color: #fff;
+    background-color: #333;
+}
+

@@ -6,26 +6,25 @@ function Score (props: any){
 
     const maxPlayerProgress = 35
     const [score, setScore] = useState(maxPlayerProgress)
-    const [relativeScore, setRelativeScore] = useState(maxPlayerProgress)
   
    useEffect(()=>{
     setScore(score + props.choiceScore)
-    if ((relativeScore +props.choiceScore) <= 0){
-        setRelativeScore(0)
-    }else if((relativeScore + props.choiceScore) >= maxPlayerProgress){
-        setRelativeScore(maxPlayerProgress)
+    if ((props.relativeScore +props.choiceScore) <= 0){
+        props.setRelativeScore(0)
+    }else if((props.relativeScore + props.choiceScore) >= maxPlayerProgress){
+        props.setRelativeScore(maxPlayerProgress)
     }else{
-        setRelativeScore(relativeScore+props.choiceScore)
+        props.setRelativeScore(props.relativeScore+props.choiceScore)
     }
    },[props.day])
 
 
     function scorepercent(){
-        let percent = relativeScore*100/maxPlayerProgress
-        if (relativeScore<=0 || percent <= 0){
+        let percent = props.relativeScore*100/maxPlayerProgress
+        if (props.relativeScore<=0 || percent <= 0){
             return ("0%")
         }
-        if (relativeScore >= maxPlayerProgress){
+        if (props.relativeScore >= maxPlayerProgress){
             return("100%")
         }
         return (percent + "%")
