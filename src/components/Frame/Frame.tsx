@@ -7,80 +7,49 @@ import "./Frame.css";
 import { useEffect, useState, useRef } from "react";
 import EasterEgg from "../EasterEgg/EasterEgg";
 import api from "../../services/api";
+import { useLocation } from "react-router-dom";
 
 function Frame() {
+  const location = useLocation();
+  const accessToken: string = location.state.accessToken;
   const initialRender = useRef(true);
-  const initialRender2 = useRef(true);
-  const initialRender3 = useRef(true);
-  const initialRender4 = useRef(true);
-
+  const initialState: Array<string> = [];
   const [playerId, setPlayerId] = useState("");
   const [day, setDay] = useState(1);
-  const [results, setResults] = useState([null]);
-  const [score, setScore] = useState(0);
   const maxPlayerProgress = 35;
   const [relativeScore, setRelativeScore] = useState(maxPlayerProgress);
   const [historyId, setHistoryId] = useState("");
   const [readyToSendInit, setReadyToSendInit] = useState(false);
-  const [readyToSendHistory, setReadyToSendHistory] = useState(false);
-  
+  const [chosenId, setChosenId] = useState("");
+
   const [historyData, setHistoryData] = useState({
     playerId: "",
     survivedDays: 0,
     survived: false,
     finalScore: 0,
     date: new Date(),
-    results: results,
+    results: initialState,
   });
+
+  useEffect(() => {
+    api.get("playerId", {
+        headers: {
+          Authorization: accessToken,
+        },
+      }).then((res: { data: { _id: string } }) => {
+        setPlayerId(res.data._id);
+      });
+  }, []);
 
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else {
       setHistoryData({
-        survivedDays: day,
-        survived: false,
-        results: results,
-        finalScore: historyData.finalScore + score,
-        date: historyData.date,
-        playerId: playerId,
-      });
-      setReadyToSendHistory(true)
-    }
-  }, [results]);
-
-  useEffect(() => {
-    async function getPlayerId() {
-      await api
-        .get("playersId/" + "email3@test.com")
-        .then((res: { data: Object }) => {
-          setPlayerId(JSON.parse(JSON.stringify(res.data))[0]._id);
-        });
-    }
-    getPlayerId();
-  }, []);
-
-  useEffect(() => {
-    if (readyToSendHistory){
-      api
-      .put("history/" + historyId, historyData)
-      .then((res: { data: Object }) => {
-        console.log(JSON.parse(JSON.stringify(res.data)));
-      });
-      setReadyToSendHistory(false)
-    }
-  }, [readyToSendHistory]);
-
-  useEffect(() => {
-    if (initialRender3.current) {
-      initialRender3.current = false;
-    } else {
-      console.log("player id:", playerId);
-      setHistoryData({
         survivedDays: 0,
         survived: false,
         finalScore: 0,
-        results: results,
+        results: initialState,
         date: new Date(),
         playerId: playerId,
       });
@@ -111,20 +80,17 @@ function Frame() {
         <div className="row">
           <div className="column">
             <Score
-              relativeScore={relativeScore}
-              setRelativeScore={(v: any) => setRelativeScore(v)}
-              choiceScore={score}
+              chosenId={chosenId}
+              playerId={playerId}
               day={day}
+              setRelativeScore={(v: number) => setRelativeScore(v)}
             />
             <Game
-              score={score}
-              results={results}
-              choiceScore={(v: any) => setScore(v)}
-              choiceId={(v: any) => {
-                setResults([...results, v]);
-              }}
+              setChosenId={(v: string) => setChosenId(v)}
+              accessToken={accessToken}
+              historyId={historyId}
               day={day}
-              passDay={(v: any) => setDay(v)}
+              passDay={(v: number) => setDay(v)}
             />
           </div>
           <Calendar day={day} />

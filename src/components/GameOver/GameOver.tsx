@@ -1,10 +1,11 @@
+import "./GameOver.css"
 function GameOver(){
 
     return(
-        <div>
+        <div className="gameOverContainer">
             <h2>Você sobreviveu x dias!</h2>
             <p>Tente novamente, você pode fazer melhor</p>
-        </div>
+      </div>
     )
 }
 export default GameOver 
