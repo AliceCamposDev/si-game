@@ -7,13 +7,13 @@ function Calendar(props: any) {
   useEffect(() => {
     if (day.length > 0 && props.day - 1 < day.length) {
       if (props.day > 1) {
+        day[props.day-1].style.backgroundColor = "gray";
         day[props.day - 2].style.backgroundColor = "lightgray";
         day[props.day - 1].scrollIntoView({
           block: "start",
           behavior: "smooth",
         });
       }
-      day[props.day-1].style.backgroundColor = "gray";
     }
   }, [props.day]);
 

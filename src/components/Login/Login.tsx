@@ -15,7 +15,7 @@ function Login() {
       <GoogleLogin
         onSuccess={(credentialResponse) => {
           const token: string = credentialResponse.credential || "";
-          api.post("PlayerToken/", { token }).then((res: { data: {accessToken: string}}) => {
+          api.post("player-token/", { token }).then((res: { data: {accessToken: string}}) => {
             navigateToMenu(res.data.accessToken)
           });
         }}

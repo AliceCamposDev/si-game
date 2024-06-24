@@ -10,6 +10,7 @@ import History from "./components/History/History";
 import Login from "./components/Login/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GameOver from "./components/GameOver/GameOver";
+import Victory from "./components/Victory/Victory";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
   {
     path: "/history",
     element: <History />,
+  },{
+    path: "/victest",
+    element: <Victory />,
   },
 ]);
 

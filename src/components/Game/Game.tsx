@@ -1,6 +1,6 @@
 import api from "../../services/api";
 import "./Game.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Game(props: any) {
   type QuestionType = {
@@ -27,6 +27,10 @@ function Game(props: any) {
     answerText: "",
   };
 
+  const questionLoaded = useRef(false);
+  const initialRender1 = useRef(true);
+  const initialRender2 = useRef(true);
+
   const [question, setQuestion] = useState<QuestionType>(questionInitialState);
   const [answers, setAnswers] = useState<AnswerType[]>([answerInitialState]);
   const [showreadMore, setShowreadMore] = useState(true);
@@ -36,24 +40,51 @@ function Game(props: any) {
     if (props.day % 7 == 0 || props.day % 7 == 6) {
       props.passDay(props.day + 1);
     } else {
-      const getQuestions = async () => {
-        await api
-          .get("questions/" + props.day)
-          .then((res: { data: Array<QuestionType> }) => {
-            setQuestion(res.data[0]); 
-          });
-      };
-      getQuestions();
+      if (initialRender1.current) {
+        if (!questionLoaded.current) {
+          const getQuestions = async () => {
+            await api
+              .get("questions/" + props.day)
+              .then((res: { data: Array<QuestionType> }) => {
+                setQuestion(res.data[0]);
+              });
+          };
+          getQuestions();
+          console.log("setting question");
+          questionLoaded.current = true;
+        }else{ 
+          const getQuestions = async () => {
+            await api
+              .get("questions/" + props.day)
+              .then((res: { data: Array<QuestionType> }) => {
+                setQuestion(res.data[0]);
+              });
+          };
+          getQuestions();
+          console.log("setting question");
+          questionLoaded.current = true;
+        }
+      }
     }
   }, [props.day]);
 
   useEffect(() => {
-    const getAnswers = async () => {
-      await api.get("answers/" + props.day).then((res: { data: AnswerType[]}) => {
-        setAnswers(res.data); 
-      });
-    };
-    getAnswers();
+    if (initialRender2.current) {
+      console.log(
+        "this should be the first page render on game initialrender2"
+      );
+      initialRender2.current = false;
+    } else {
+      const getAnswers = async () => {
+        await api
+          .get("answers/" + props.day)
+          .then((res: { data: AnswerType[] }) => {
+            setAnswers(res.data);
+          });
+      };
+      getAnswers();
+      console.log("setting answers");
+    }
   }, [question]);
 
   useEffect(() => {
@@ -100,7 +131,7 @@ function Game(props: any) {
     }
   }, [answers]);
 
-  function confChoice(position: number):void {
+  function confChoice(position: number): void {
     let optionConf = document.getElementsByClassName(
       "optionConf"
     ) as HTMLCollectionOf<HTMLElement>;
@@ -122,19 +153,28 @@ function Game(props: any) {
         let correct: boolean = false;
         setFirstChoice(false);
         const chosenAnswerId: string = answers[choice]._id;
-        await api.post(
-          "chosenAnswer",
-          {
-            answerId: chosenAnswerId,
-            historyId: props.historyId,
-            day: props.day,
-          },
-          {
-            headers: {
-              Authorization: accessToken,
+        await api
+          .post(
+            "chosen-answer",
+            {
+              answerId: chosenAnswerId,
+              historyId: props.historyId,
+              day: props.day,
             },
-          }
-        );
+            {
+              headers: {
+                Authorization: accessToken,
+              },
+            }
+          )
+          .then((res: { data: { score: number } }) => {
+            console.log("score", res.data.score);
+            if (res.data.score < 0) {
+              correct = false;
+            } else {
+              correct = true;
+            }
+          });
         props.setChosenId(chosenAnswerId);
 
         let option1 = document.getElementById("option1") as HTMLElement;
@@ -163,7 +203,7 @@ function Game(props: any) {
 
       let jsonCorrectAnswer = [{ correctAnswer: "" }];
       await api
-        .get("QuestionAnswer/" + props.day)
+        .get("question-answer/" + props.day)
         .then((res: { data: Object }) => {
           jsonCorrectAnswer = JSON.parse(JSON.stringify(res.data)); //TODO: consertar isso... crimes sendo cometidos aqui!
         });
@@ -179,7 +219,7 @@ function Game(props: any) {
     popover.style.visibility = "visible";
   }
 
-  function readMore(): void{
+  function readMore(): void {
     let readMore = document.getElementById("readMore") as HTMLElement;
 
     if (showreadMore) {

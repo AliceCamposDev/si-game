@@ -1,9 +1,9 @@
 import "./GameOver.css"
-function GameOver(){
+function GameOver(props: any){
 
     return(
         <div className="gameOverContainer">
-            <h2>Você sobreviveu x dias!</h2>
+            <h2>Você sobreviveu {props.day} dias!</h2>
             <p>Tente novamente, você pode fazer melhor</p>
       </div>
     )
