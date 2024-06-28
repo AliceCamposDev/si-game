@@ -16,3 +16,13 @@
   justify-content: center;
 }
 
+.gameOverFrame{
+  background-color: rgba(0, 0, 0, 0.95);
+  width: 55%;
+  height: 35%;
+  border-radius: 8px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

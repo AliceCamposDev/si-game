@@ -11,6 +11,7 @@ import Login from "./components/Login/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GameOver from "./components/GameOver/GameOver";
 import Victory from "./components/Victory/Victory";
+import EasterEgg from "./components/EasterEgg/EasterEgg";
 
 const router = createBrowserRouter([
   {
@@ -36,10 +37,7 @@ const router = createBrowserRouter([
   {
     path: "/history",
     element: <History />,
-  },{
-    path: "/victest",
-    element: <Victory />,
-  },
+  }
 ]);
 
 const root = document.getElementById("root");

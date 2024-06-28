@@ -52,26 +52,31 @@ function History() {
     <div className="historyContainer">
       <h2>Histórico</h2>
       <div className="cardsContainer">
-        {historydata.length > 0 &&
+        {historydata.length > 0 ? (
           historydata.map((d, i) => (
             <div key={i} className="historyCard">
               <div>
-                <p>Data:</p>
                 <p>{parseDate(d.date)}</p>
               </div>
               <div>
-                <p>score: </p>
+                <p>score:&#160;</p>
                 <p>{d.finalScore}</p>
               </div>
               <div>
-                <p>Dias sobrevividos: </p>
+                <p>Dias sobrevividos:&#160;</p>
                 <p>{d.survivedDays}</p>
               </div>
               <br />
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="historyNotFound">Nenhum histórico encontrato</p>
+        )}
       </div>
     </div>
   );
 }
 export default History;
+
+
+

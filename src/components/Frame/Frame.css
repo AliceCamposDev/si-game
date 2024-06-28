@@ -9,3 +9,12 @@
 .frameContainer{
 height: 100vh;
 }
+
+@media (max-width: 900px) {
+    .calendar {
+      display: none;
+    }
+    .row{
+        display: block;
+    }
+  }

@@ -50,6 +50,7 @@ function Frame() {
   const [lastHistoryId, setLastHistoryId] = useState("");
   const [verifyContinue, setVerifyContinue] = useState(false);
   const [historyData, setHistoryData] = useState([historyInitialState]);
+  const [playerName, setPlayerName]=  useState("");
 
   useEffect(() => {
     console.log("accessToken", accessToken);
@@ -59,8 +60,11 @@ function Frame() {
           Authorization: accessToken,
         },
       })
-      .then((res: { data: { _id: string } }) => {
+      .then((res: { data: { _id: string, name: string} }) => {
         console.log("playerid",res.data._id)
+        console.log("playerName",res.data.name)
+        const firstName = res.data.name.split(' ');
+        setPlayerName(firstName[0]);
         setPlayerId(res.data._id);
       });
   }, []);
@@ -146,7 +150,7 @@ function Frame() {
    }
   }, [readyToSendInit]);
 
-  if (relativeScore <= 0) {
+  if (relativeScore <= 0 && finished == false) {
     api.post("set-history-finished/"+historyId, "",{
       headers: {
         Authorization: accessToken,
@@ -164,7 +168,8 @@ function Frame() {
     if (relativeScore >= maxPlayerProgress) {
       return <EasterEgg />;
     } else {
-      return <Victory />;
+      return <Victory 
+      playerName= {playerName}/>;
     }
   } else {
     return (
@@ -189,7 +194,7 @@ function Frame() {
               passDay={(v: number) => setDay(v)}
             />
           </div>
-          <Calendar day={day} />
+          <Calendar className="calendar" day={day} />
         </div>
       </div>
     );

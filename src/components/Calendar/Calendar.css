@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     max-height: 100vh;
+    user-select: none;
 }
 .holiday{
     color: rgb(170, 0, 0);
@@ -48,4 +49,9 @@
     margin-right: 4vw;
     overflow: hidden;
     border: 1px #00a9e0 solid;
+  }
+  @media (max-width: 900px) {
+    .calendarContainer{
+      display: none;
+    }
   }

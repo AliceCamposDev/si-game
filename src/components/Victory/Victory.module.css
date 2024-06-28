@@ -1,0 +1,76 @@
+.content {
+    padding-inline: 1% 1% 1% 1%;
+    background-color: #00a9e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 530px;
+}
+.roamB{
+    color:rgb(255, 255, 175);
+}
+.contentInner {
+    width: 98%;
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 8px;
+    background-color: rgb(77, 77, 77);
+}
+.contentInner p{
+    margin: 3%;
+}
+
+
+.victoryContainer {
+    width: 100vw;
+    display: flex;
+    margin-top: 20px;
+}
+.victoryContainerLeft{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.victoryContainerRight{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gameName{
+    color: #00a9e0;
+}
+.QRCode {
+    border: 2px solid #00a9e0;
+    background-image: url(../../assets/images/frame.png);
+    background-size: cover;
+    width: 200px;
+    border-radius: 8px;
+    height: 200px;
+} 
+/* button{
+    height: 50px;
+    width: 150px;
+    border-radius: 8px;
+    border: 2px solid #00a9e0;
+} */
+.button {
+    height: 50px;
+    width: 150px;
+    border-radius: 8px;
+    border: 2px solid #00a9e0;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3); /* Sombra para o efeito 3D */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.button:hover {
+    transform: translateY(-2px); /* Eleva o botão quando hover */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.4); /* Aumenta a sombra para um efeito mais pronunciado */
+}

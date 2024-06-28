@@ -257,7 +257,8 @@ function Game(props: any) {
           <div className="welcome"></div>
           <div className="history"></div>
           <div className="cmd-line">
-            PS C:\{">    "}
+            PS C:\{">    "} run {props.day}/30 
+            <br />
             <span className="type" id="questionText"></span>
             <br />
             <span className="type" id="questionQuestion"></span>

@@ -1,27 +1,34 @@
 .historyCard {
-    background-color: aliceblue;
     margin: 5px;
+    background-color: rgb(248, 252, 255);
     display: flex;
     justify-content: space-around;
     border-radius: 8px;
-    margin-top: 7px;
-    margin-bottom: 7px;
-    height: 50px;
-    align-items: center;
     width: 65vw;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 
 }
-
+.historyNotFound{
+    color: white;
+}
 .historyContainer{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+   
 }
 .historyCard div{
     display: flex;
-    width: 25%;
+    width: 30%;
     justify-content: space-around;
+    justify-content: left;
+}
+.historyCard div p{
+    font-size: 12px;
 }
 
 h2 {
